@@ -87,10 +87,10 @@ createMarkup();
 
 gallery.addEventListener("click", (e) => {
 e.preventDefault();
-if (e.target === e.currentTarget) return;
-const linkGalleryEl = e.target.closest("a");
-const image = images.find((img) => img.original == linkGalleryEl);
-
+const clickedElement = e.target;
+if (!clickedElement.classList.contains("gallery-image")) return;
+const linkGalleryEl = clickedElement.closest("a");
+const image = images.find((img) => img.original === linkGalleryEl.href);
 showLargeImg(image);
 });
 
