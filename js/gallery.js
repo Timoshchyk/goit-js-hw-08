@@ -85,26 +85,24 @@ gallery.innerHTML = markup;
 }
 createMarkup();
 
-gallery.addEventListener("click", (event) => {
-event.preventDefault();
-if (event.target === event.currentTarget) return;
-const liElem = event.target;
-const dataSource = liElem.dataset.source;
-const image = images.find((el) => el.original === dataSource);
+gallery.addEventListener("click", (e) => {
+e.preventDefault();
+if (e.target === e.currentTarget) return;
+const linkGalleryEl = e.target.closest("a");
+const image = images.find((img) => img.original == linkGalleryEl);
 
 showLargeImg(image);
 });
 
 function showLargeImg({ original, description }) {
 const instance = basicLightbox.create(
-    `
+    `<div class="modal">
     <img
-    class="gallery-image"
+    class="gallery-image-full"
     src="${original}"
-    data-source="${original}"
-    alt="${description}"
-    />
-`,
+    data-source="large-image.jpg"
+    alt= "${description}"
+    /></div>`,
     {
     onShow: (instance) => {
         document.addEventListener("keydown", onModalClose);
